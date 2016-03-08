@@ -160,7 +160,7 @@ public class Piece : MonoBehaviour {
     {
         foreach(Block b in blocks)
         {
-            if (b.onCollision || b.cell == null)
+            if (b.onCollision || b.cellCollision == null)
             {
                 return false;
             }
@@ -174,7 +174,8 @@ public class Piece : MonoBehaviour {
         foreach(Block b in blocks)
         {
             b.transform.localScale = Vector3.Lerp(b.transform.localScale, new Vector3(1f, 1f, 1f), 0.9f);
-            b.transform.SetParent(b.cell.transform);
+            b.transform.SetParent(b.cellCollision.transform);
+            b.cell = b.cellCollision;
         }
     }
 }

@@ -7,6 +7,9 @@ public class Block : MonoBehaviour {
 
     public Light l;
 
+    public Cell cellCollision = null;
+
+    [SerializeField]
     private Cell _cell = null;
     public Cell cell
     {
@@ -42,7 +45,8 @@ public class Block : MonoBehaviour {
         Cell cell = collision.gameObject.GetComponent<Cell>();
         if (cell != null)
         {
-            this.cell = cell;
+            //this.cell = cell;
+            cellCollision = cell;
         }
 
         Block b = collision.gameObject.GetComponent<Block>();
@@ -55,10 +59,11 @@ public class Block : MonoBehaviour {
     public void OnTriggerExit(Collider collision)
     {
         Cell cell = collision.gameObject.GetComponent<Cell>();
-        if (cell != null && cell.block == this && this.cell != null)
+        if (cellCollision != null && cellCollision.block == this && this.cellCollision != null)
         {
-            this.cell.block = null;
-            this.cell = null;
+            ///this.cell.block = null;
+            ///this.cell = null;
+            cellCollision = null;
         }
 
         Block b = collision.gameObject.GetComponent<Block>();
@@ -66,5 +71,5 @@ public class Block : MonoBehaviour {
         {
             onCollision = false;
         }
-    }
+    }    
 }

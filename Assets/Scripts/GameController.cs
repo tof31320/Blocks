@@ -112,12 +112,14 @@ public class GameController : MonoBehaviour {
             currentPiece = Piece.Create(PieceType.T_TYPE);
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.C))
         {
-            grille.RotateLeft();
-        }else if (Input.GetKeyDown(KeyCode.S))
-        {
-            grille.RotateRight();
+            List<int> hLines = grille.CheckHorizontalsLines();
+            List<int> vLines = grille.CheckVerticalsLines();
+
+            Debug.Log("HLines: " + hLines.Count + " , VLines=" + vLines.Count);
+
+            grille.CheckAndDestroyLines();
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1))
@@ -146,7 +148,7 @@ public class GameController : MonoBehaviour {
             }            
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && currentPiece != null)
         {
             currentPiece.Rotate();
         }

@@ -39,18 +39,29 @@ public class Cell : MonoBehaviour {
 
         }
     }
-
-    private Block _block = null;
-    [SerializeField]
+    
 	public Block block
     {
-        get { return _block; }
+        get {
+            Block b = null;
+            if (transform.childCount > 0)
+            {
+                b = transform.GetChild(0).GetComponent<Block>();
+            }
+            return b;
+        }
         set
         {
-            if (_block == null || value == null)
+            if (transform.childCount > 0)
             {
-                _block = value;
+                transform.DetachChildren();
+            }
+
+            Block b = value;
+            if (b != null)
+            {
+                b.transform.SetParent(transform);
             }                   
         }
-    }
+    }   
 }

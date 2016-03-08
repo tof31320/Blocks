@@ -29,9 +29,9 @@ public class Grille : MonoBehaviour {
     {
         cells = new List<Cell>();
 
-        for (int i = 0; i < dimensions.x; i++)
+        for (int j = 0; j < dimensions.y; j++)
         {
-            for(int j = 0; j < dimensions.y; j++)
+            for(int i = 0; i < dimensions.x; i++)
             {
                 Cell cell = CreateAndCell(i, j);
                 cells.Add(cell);
@@ -55,7 +55,7 @@ public class Grille : MonoBehaviour {
         g.transform.SetParent(transform);
 
         Cell cell = g.GetComponent<Cell>();
-        cell.id = i * (int) dimensions.x + j;
+        cell.id = j * (int) dimensions.y + i;
         cell.x = i;
         cell.y = j;
 
@@ -68,7 +68,7 @@ public class Grille : MonoBehaviour {
         {
             return null;
         }
-        //return cells[i * (int) dimensions.x + j];
+        /*return cells[j * (int) dimensions.y + i];*/
         for(int it = 0; it < cells.Count; it++)
         {
             Cell cell = cells[it];            
@@ -175,19 +175,68 @@ public class Grille : MonoBehaviour {
     {
         List<int> horinzontalLines = CheckHorizontalsLines();
         List<int> verticalLines = CheckVerticalsLines();
+        List<Cell> cellsToDestroy = new List<Cell>();
 
         foreach(int line in horinzontalLines)
         {
-            DestroyLines(line);
-            Debug.Log("Ligne H: x=" + line);
+            for(int x = 0; x < dimensions.x; x++)
+            {
+                Cell cell = GetCellAt(x, line);
+                cellsToDestroy.Add(cell);
+            }
+            Debug.Log("Ligne H: x=" + line);            
         }
         foreach (int line in verticalLines)
         {
-            DestroyLines(line, "V");
-            Debug.Log("Ligne V: y=" + line);
+            for (int y = 0; y < dimensions.y; y++)
+            {
+                Cell cell = GetCellAt(line, y);
+                cellsToDestroy.Add(cell);
+            }
+            Debug.Log("Ligne V: y=" + line);            
         }
 
+        dimensions.x = dimensions.x - verticalLines.Count;
+        dimensions.y = dimensions.y - horinzontalLines.Count;
+
+        foreach (Cell cell in cellsToDestroy)
+        {
+            DestroyCell(cell);
+        }
+
+        if (horinzontalLines.Count > 0 || verticalLines.Count > 0)
+        {
+            UpdateCellsIndexes();
+        }        
+
+        /*if (horinzontalLines.Count > 0
+        || verticalLines.Count > 0)
+        {
+            CheckAndDestroyLines();
+        }*/
         //ReindexCells();
+    }
+
+    void UpdateCellsIndexes()
+    {
+        int x = 0;
+        int y = 0;
+
+        foreach(Cell cell in cells)
+        {                      
+            cell.x = x;
+            cell.y = y;
+
+            if (x >= dimensions.x - 1)
+            {
+                x = 0;
+                y++;
+            }
+            else
+            {
+                x++;
+            }
+        }
     }
 
     public void DestroyLines(int n, string sens = "H")
