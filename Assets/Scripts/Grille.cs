@@ -217,6 +217,13 @@ public class Grille : MonoBehaviour {
         //ReindexCells();
     }
 
+    public Cell GetCellInCenter()
+    {
+        Vector2 center = new Vector2(dimensions.x / 2, dimensions.y / 2);
+
+        return GetCellAt((int) center.x, (int) center.y);
+    }
+
     void UpdateCellsIndexes()
     {
         int x = 0;

@@ -81,33 +81,22 @@ public class Piece : MonoBehaviour {
                 CreateAddBlockAtRelativePosition(1, 0);
                 CreateAddBlockAtRelativePosition(2, 0);
                 CreateAddBlockAtRelativePosition(3, 0);
-                CreateAddBlockAtRelativePosition(4, 0);
                 break;
             case PieceType.L_TYPE:
                 CreateAddBlockAtRelativePosition(0, 0);
-                CreateAddBlockAtRelativePosition(0, 1);
-                CreateAddBlockAtRelativePosition(0, 2);
-                CreateAddBlockAtRelativePosition(0, 3);
-                CreateAddBlockAtRelativePosition(1, 3);
+                CreateAddBlockAtRelativePosition(0, 1); CreateAddBlockAtRelativePosition(1, 1); CreateAddBlockAtRelativePosition(2, 1);                
                 break;
             case PieceType.P_TYPE:
-                CreateAddBlockAtRelativePosition(0, 0);
-                CreateAddBlockAtRelativePosition(1, 0);
-                CreateAddBlockAtRelativePosition(1, 1);
-                CreateAddBlockAtRelativePosition(1, 2);
-                CreateAddBlockAtRelativePosition(1, 3);
+                                                                                                CreateAddBlockAtRelativePosition(2, 0);
+                CreateAddBlockAtRelativePosition(0, 1); CreateAddBlockAtRelativePosition(1, 1); CreateAddBlockAtRelativePosition(2, 1);
                 break;
             case PieceType.N1_TYPE:
-                CreateAddBlockAtRelativePosition(0, 0);
-                CreateAddBlockAtRelativePosition(0, 1);
-                CreateAddBlockAtRelativePosition(1, 1);
-                CreateAddBlockAtRelativePosition(1, 2);
+                                                        CreateAddBlockAtRelativePosition(1, 0); CreateAddBlockAtRelativePosition(2, 0);
+                CreateAddBlockAtRelativePosition(0, 1); CreateAddBlockAtRelativePosition(1, 1);                
                 break;
             case PieceType.N2_TYPE:
-                CreateAddBlockAtRelativePosition(1, 0);
-                CreateAddBlockAtRelativePosition(1, 1);
-                CreateAddBlockAtRelativePosition(0, 1);
-                CreateAddBlockAtRelativePosition(0, 2);
+                CreateAddBlockAtRelativePosition(0, 0); CreateAddBlockAtRelativePosition(1, 0);
+                                                        CreateAddBlockAtRelativePosition(1, 1); CreateAddBlockAtRelativePosition(2, 1);                
                 break;
             case PieceType.O_TYPE:
                 CreateAddBlockAtRelativePosition(0, 0);

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -154,6 +155,7 @@ public class GameController : MonoBehaviour {
         }
 
         if (Input.GetMouseButtonDown(0) 
+        && !EventSystem.current.IsPointerOverGameObject()
         && currentPiece != null
         && currentPiece.AboveFreeCells())
         {            
@@ -196,7 +198,7 @@ public class GameController : MonoBehaviour {
     public void ShakeCamera()
     {
         iTween.PunchPosition(Camera.main.gameObject, iTween.Hash(
-            "amount", new Vector3(0f, 1f, 0f),
+            "amount", new Vector3(0f, 0f, 1f),
             "time", 0.2f
             ));
     }
